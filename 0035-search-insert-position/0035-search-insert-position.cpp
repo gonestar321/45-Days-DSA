@@ -7,16 +7,16 @@ public:
         while (si <= ei) {
             int mid = si + ((ei - si) / 2);
             if (nums[mid] == target) {
-                return mid; // Target found at mid index
+                return mid; 
             }
             if (nums[mid] < target) {
-                si = mid + 1; // Move to the right half
+                si = mid + 1; 
             } else {
-                ei = mid - 1; // Move to the left half
+                ei = mid - 1; 
             }
         }
 
-        // When target is not found, si is the correct insert position
+        
         return si;
     }
 };
