@@ -9,16 +9,28 @@
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
-        //Floyd's Tortoise and Hare approach
-        ListNode *slow=head , *fast=head;
+        //Floyd's Tortoise and Hare method
+        //fast pointer and a slow pointer
+        // we'll keep the loop on till the time fast pointer catches
+        // the slow pointer
+        // when it does... we call it a CYCLE IN LINKED LIST
+        
+         ListNode *tortoise = head, *hare = head ;
 
-        while(fast and fast->next){
-            slow = slow->next;
-            fast = fast->next->next;
-            if(fast == slow){
-                return true;
-            }
+        if (head == nullptr || head->next == nullptr) {
+        return false; // No cycle if the list is empty or has only one node
+    }
+
+
+    while(hare != nullptr && hare ->next != nullptr){
+        tortoise = tortoise->next;
+        hare = hare->next->next;
+
+        if(tortoise == hare){
+            return true;
         }
-        return false;
+    }
+    return false;
+
     }
 };
