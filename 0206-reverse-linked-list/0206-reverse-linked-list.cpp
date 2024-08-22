@@ -11,21 +11,38 @@
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
-        ListNode*temp = head;
+        // ListNode*temp = head;
 
-        stack<int> st;
+        // stack<int> st;
 
-        while( temp!= nullptr){
-            st.push(temp->val);
-            temp = temp->next;
+        // while( temp!= nullptr){
+        //     st.push(temp->val);
+        //     temp = temp->next;
+        // }
+        // temp = head;
+
+        // while(temp != nullptr){
+        //     temp->val = st.top();
+        //     st.pop();
+        //     temp = temp->next;
+        // }
+        // return head;
+
+        //optimised approach below-->>
+        //reverse the links 
+        ListNode* temp = head;
+
+        ListNode*prev = NULL;
+
+        while(temp!=NULL){
+            //store the next node in *front* for reference
+            ListNode* front = temp->next;
+
+            temp->next = prev;
+            prev = temp;
+            temp = front;
         }
-        temp = head;
+        return prev;
 
-        while(temp != nullptr){
-            temp->val = st.top();
-            st.pop();
-            temp = temp->next;
-        }
-        return head;
     }
 };
