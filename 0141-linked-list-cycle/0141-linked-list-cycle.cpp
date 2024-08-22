@@ -12,14 +12,13 @@ public:
         ListNode* tortoise = head;
         ListNode* hare = head;
 
-        while( hare!=nullptr && hare->next!=nullptr){
+        while( hare !=nullptr && hare->next !=nullptr){
             tortoise = tortoise->next;
             hare = hare->next->next;
-
             if(tortoise == hare){
-                return 1;
+                return true;
             }
         }
-        return 0;
+        return false;
     }
 };
