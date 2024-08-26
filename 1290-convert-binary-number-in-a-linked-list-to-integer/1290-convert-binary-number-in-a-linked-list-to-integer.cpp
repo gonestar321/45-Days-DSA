@@ -11,23 +11,13 @@
 class Solution {
 public:
     int getDecimalValue(ListNode* head) {
-          
-        ListNode *ptr = head;
-        int vals = 0;
-        while (ptr) {
-            vals++;
-            ptr = ptr->next;
-        }
+        int result = 0;
 
-        
-        ptr = head;
-        int decimalValue = 0;
-        while (ptr) {
-            
-            decimalValue = (decimalValue << 1) | ptr->val;
-            ptr = ptr->next;
-        }
+        while( head != nullptr){
 
-        return decimalValue;
+            result = (result << 1)|head->val;
+            head = head->next;
+        }
+        return result;
     }
 };
