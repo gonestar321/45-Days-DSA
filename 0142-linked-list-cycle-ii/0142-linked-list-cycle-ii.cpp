@@ -9,21 +9,21 @@
 class Solution {
 public:
     ListNode *detectCycle(ListNode *head) {
-        //tortoise and hare method
-        ListNode* fast = head;
         ListNode* slow = head;
+        ListNode* fast = head;
 
-        while(fast!= NULL&& fast->next!=NULL){
-            slow= slow->next;
+        while( fast != NULL && fast->next != NULL){
+            slow = slow->next;
             fast = fast->next->next;
+            
             if(fast == slow){
-                ListNode* ptr = head;
-                
-                while( ptr != slow){
-                    ptr = ptr->next;
+                ListNode* start = head;
+
+                while(start!=slow){
+                    start = start->next;
                     slow = slow->next;
                 }
-                return ptr;
+                return start;
             }
         }
         return NULL;
