@@ -1,20 +1,35 @@
 class Solution {
 public:
     bool check(vector<int>& nums) {
-        int n = nums.size();
-        int count =0;
+    //     int n = nums.size();
+    //  for( int i = 0 ; i < n ; i++ ){
+    //     if (n <= 1) return 1;
 
-        for( int i = 1 ; i< n ; i++){
-            if(nums[i - 1] > nums[i]){
-                count++ ;
+    //     else if( nums[i+1] >= nums[i]){
+    //         continue;
+    //     }
+    //     else{
+    //         return false;
+    //     }
+    //  }
+    //  return true;
+//THIS WAS ONLY APPLICABLE TO THE IS SORTED PART
+// FOR INCORPORATING THE IS ROTATED PART
+// we'll do the following
 
+
+       int n = nums.size();
+        int break_points = 0;
+
+        for (int i = 0; i < n; i++) {
+            // Compare current element with the previous one
+            if (nums[i] < nums[(i - 1 + n) % n]) { // Use modulo for circular indexing
+                break_points++;
             }
-
-        }
-        if( nums[ n-1 ] > nums[0]){
-            count++;
         }
 
-        return count<=1;
-    }
+        // Check if last element is greater than the first (for rotation)
+        return break_points <= 1;
+        }
+    
 };
