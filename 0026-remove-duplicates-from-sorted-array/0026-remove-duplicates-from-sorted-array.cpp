@@ -1,15 +1,68 @@
-
- class Solution {
+class Solution {
 public:
+    void replace(int& a, int& b) {
+    int c = a;
+    a = b;
+    b = c;
+}
+
+
     int removeDuplicates(vector<int>& nums) {
-       int i=0;
-        for(int j= i+1 ;j<nums.size();j++){
-            if(nums[j]!=nums[i]){
-                nums[i+1]=nums[j];
-                i++;
-            }
+
+    //two pointer initialisation
+
+    int n = nums.size();
+    if(n==0){
+        return 0;
+    }
+    int first = 0 ;
+    // int swap =0;
+
+    for( int i =0 ; i< n ; i++){
+
+        if( nums[first] != nums[i]){
+            first++;
+            nums[first] = nums[i];
         }
-        return i+1;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // int n = nums.size();
+       
+        // unordered_set<int> uniques;
+        // int j = 0;
+
+        // for( int i = 0; i<n ; i++ ){
+        //     if(uniques.find(nums[i])== uniques.end()){
+        //     uniques.insert(nums[i]);
+        //      nums[j++] = nums[i];
+        //     }
+        // }
+
+       
+        // return j;
+        return first +1;
     }
 };
-    
