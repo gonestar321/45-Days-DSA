@@ -16,7 +16,6 @@ public:
         return 0;
     }
     int first = 0 ;
-    // int swap =0;
 
     for( int i =0 ; i< n ; i++){
 
@@ -25,7 +24,8 @@ public:
             nums[first] = nums[i];
         }
     }
-
+//using this approach , we won't be using any extra space.
+//we'll be replacing within the array itself
 
 
 
