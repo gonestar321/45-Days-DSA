@@ -1,35 +1,27 @@
 class Solution {
 public:
     bool check(vector<int>& nums) {
-    //     int n = nums.size();
-    //  for( int i = 0 ; i < n ; i++ ){
-    //     if (n <= 1) return 1;
-
-    //     else if( nums[i+1] >= nums[i]){
-    //         continue;
-    //     }
-    //     else{
-    //         return false;
-    //     }
-    //  }
-    //  return true;
-//THIS WAS ONLY APPLICABLE TO THE IS SORTED PART
-// FOR INCORPORATING THE IS ROTATED PART
-// we'll do the following
-
 
        int n = nums.size();
-        int break_points = 0;
-
-        for (int i = 0; i < n; i++) {
-            // Compare current element with the previous one
-            if (nums[i] < nums[(i - 1 + n) % n]) { // Use modulo for circular indexing
-                break_points++;
-            }
+       int count = 0;
+//ascending order ke violation ek hi allowed hai
+       for(int i = 1 ; i<n ; i++){
+        if(nums[i-1] > nums[i] ){
+            count++;
         }
+       }
+//agar last element first se bada hua toh 
+//usko rotate karne par wo element first element se just 
+//ek pehle aayega
+// fir wo ascending ki condition ko violate kardega
+       if( nums[n-1] > nums[0]){
+        count++;
+       }
+//aisi ascend order ki violation hum sirf ek hi allow
+// kar skte hain 
+// for the array to be in ascending order and/or rotated
 
-        // Check if last element is greater than the first (for rotation)
-        return break_points <= 1;
-        }
+       return count<=1;
+    }
     
 };
