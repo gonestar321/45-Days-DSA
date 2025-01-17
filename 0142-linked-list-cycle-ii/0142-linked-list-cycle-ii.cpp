@@ -9,23 +9,24 @@
 class Solution {
 public:
     ListNode *detectCycle(ListNode *head) {
-        ListNode* slow = head;
-        ListNode* fast = head;
-
-        while( fast != NULL && fast->next != NULL){
-            slow = slow->next;
+        ListNode * fast = head;
+        ListNode * slow = head;
+// pehle loop find kardo tortoise har method se
+        while( fast!= NULL && fast ->next !=NULL){
             fast = fast->next->next;
-            
-            if(fast == slow){
-                ListNode* start = head;
-
-                while(start!=slow){
-                    start = start->next;
+            slow = slow->next;
+// intersection point found
+            if( fast == slow){
+//abb chalega 
+                ListNode* entry = head;
+                while (entry != slow) {
+                    entry = entry->next;
                     slow = slow->next;
                 }
-                return start;
+                return entry;
             }
         }
         return NULL;
+
     }
 };
