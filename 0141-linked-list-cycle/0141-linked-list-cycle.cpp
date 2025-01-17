@@ -9,13 +9,18 @@
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
-        ListNode* tortoise = head;
-        ListNode* hare = head;
+        //tortoise hare method bata rhe hain ye 
+        //dekhte hain baaki...
+        ListNode* fast = head;
+        ListNode* slow = head;
 
-        while( hare !=nullptr && hare->next !=nullptr){
-            tortoise = tortoise->next;
-            hare = hare->next->next;
-            if(tortoise == hare){
+        if( head==NULL || head->next ==NULL) return 0;
+
+      while (fast != NULL && fast->next != NULL) {
+            fast = fast->next->next; 
+            slow = slow->next;     
+
+            if (fast == slow) {
                 return true;
             }
         }
