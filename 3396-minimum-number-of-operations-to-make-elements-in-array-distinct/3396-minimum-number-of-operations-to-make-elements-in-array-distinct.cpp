@@ -19,7 +19,6 @@ public:
                 }
                 seen.insert(num);
             }
-
             if (!hasDuplicate) break;
 
             // Perform the operation - remove first 3 elements (or all if < 3)
