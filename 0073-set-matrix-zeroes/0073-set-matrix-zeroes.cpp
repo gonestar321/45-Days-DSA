@@ -19,10 +19,14 @@ public:
             // int delRow = -rowNo;
             // int delCol = -colNo;
             for(int i = 0 ; i <n ; i++){
-                matrix[i][colNo] = 0;
+                if(matrix[i][colNo]!=0){
+                    matrix[i][colNo] = 0;
+                }
             }
-            for(int i = 0 ; i <n ; i++){
-                matrix[rowNo][i] = 0;
+            for(int i = 0 ; i <m ; i++){
+                if(matrix[rowNo][i]!= 0){
+                    matrix[rowNo][i] = 0;
+                }
             }
             q.pop();
         }
