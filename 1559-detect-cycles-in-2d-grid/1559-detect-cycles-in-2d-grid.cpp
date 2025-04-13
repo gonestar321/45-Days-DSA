@@ -1,39 +1,69 @@
 class Solution {
-public:
-    int m, n;
-    vector<vector<bool>> visited;
-    
-    bool dfs(vector<vector<char>>& grid, int x, int y, int fromX, int fromY, char ch) {
-        if (visited[x][y]) return true;
 
-        visited[x][y] = true;
+private: 
 
-        vector<pair<int, int>> directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
-        for (auto [dx, dy] : directions) {
-            int newX = x + dx;
-            int newY = y + dy;
+    bool bfs( vector<vector<char>>& grid , char alpha ,
+             queue<tuple<int,int,int,int>> &q , vector<vector<bool>>& vis ){
 
-            if (newX < 0 || newY < 0 || newX >= m || newY >= n) continue;
-            if (grid[newX][newY] != ch) continue;
-            if (newX == fromX && newY == fromY) continue;  // Don't go back to previous cell
+            // queue is already taken by reference 
+            int n = grid.size();
+            int m = grid[0].size();
 
-            if (dfs(grid, newX, newY, x, y, ch)) return true;
-        }
+            while( !q.empty() ){
+                tuple<int,int,int,int> node = q.front();
+                q.pop();
 
-        return false;
-    }
-    
-    bool containsCycle(vector<vector<char>>& grid) {
-        m = grid.size();
-        n = grid[0].size();
-        visited = vector<vector<bool>>(m, vector<bool>(n, false));
+                auto[ x , y , px , py ] = node;
 
-        for (int i = 0; i < m; ++i) {
-            for (int j = 0; j < n; ++j) {
-                if (!visited[i][j]) {
-                    if (dfs(grid, i, j, -1, -1, grid[i][j])) {
+                int delX[] = { 0 , -1 , 0 , 1 };
+                int delY[] = { -1 , 0 , 1 , 0 };
+
+                for( int k = 0 ; k < 4 ; k++){
+                    int nextRow = x + delX[k];
+                    int nextCol = y + delY[k];
+
+
+                     if(nextRow >= 0 && nextRow < n && nextCol >=0 && nextCol < m && 
+                                (nextRow != px || nextCol != py ) &&// out of bounds check
+                                grid[nextRow][nextCol]== alpha && !vis[nextRow][nextCol] ){
+                                         q.push({nextRow , nextCol , x , y});
+                                         vis[nextRow][nextCol] = true;
+                                }
+                        
+                    else if (nextRow >= 0 && nextRow < n && nextCol >= 0 && nextCol < m &&
+                            vis[nextRow][nextCol] == true &&
+                            (nextRow != px || nextCol != py) && grid[nextRow][nextCol]== alpha ){
                         return true;
                     }
+
+                
+                }
+            } 
+            return false;
+    }
+
+
+public:
+    bool containsCycle(vector<vector<char>>& grid) {
+        
+        int n = grid.size();
+        int m = grid[0].size();
+
+        vector<vector<bool>> vis(n, vector<bool>(m,false));
+
+        queue<tuple<int,int,int,int>>  q ;
+        //q.push({x,y, xp , yp}) ;
+
+        for( int i = 0 ; i < n ; i ++){
+            for ( int j = 0 ; j< m ; j++){
+                if( vis[i][j] == false ){
+                    int alpha = grid[i][j];
+                    vis[i][j] = true;
+                    q.push({i,j,-1,-1});
+                    if(bfs( grid , alpha  , q , vis )){
+                        return true;
+                    };
+
                 }
             }
         }
