@@ -2,17 +2,20 @@ class Solution {
 public:
     bool containsDuplicate(vector<int>& nums) {
         
-        int n = nums.size();
+        unordered_map<int,int> umap; // value and frequency 
 
-        set<int> s;
+        for( int i = 0 ; i < nums.size() ; ++i){
 
+            int x = nums[i];
 
-        for( int i = 0 ; i < n ; i++ ){
-            s.emplace(nums[i]);
+            if( umap.count(x)){
+                return true;
+            }
+            else{
+                umap[x]++; // this increments the frequency and adds if the element isn't already there
 
+            }
         }
-        
-        if( s.size() < nums.size()) return true;
-        else return false;
+        return false;
     }
 };
