@@ -1,29 +1,46 @@
 class Solution {
     private: 
-        void bfs(vector<vector<char>>& grid , vector<vector<bool>>& vis  , int x , int y ){
-            queue<pair<int,int>> q;
-            q.push({x , y} );
+        // void bfs(vector<vector<char>>& grid , vector<vector<bool>>& vis  , int x , int y ){
+        //     queue<pair<int,int>> q;
+        //     q.push({x , y} );
 
-            vector<int> dx = { 0 , -1 , 0 , 1 };
-            vector<int> dy = { -1 , 0 , 1 , 0 };
+        //     vector<int> dx = { 0 , -1 , 0 , 1 };
+        //     vector<int> dy = { -1 , 0 , 1 , 0 };
 
-            while( !q.empty()){
+        //     while( !q.empty()){
 
-            int nodeX = q.front().first;
-            int nodeY = q.front().second;
-                q.pop();
+        //     int nodeX = q.front().first;
+        //     int nodeY = q.front().second;
+        //         q.pop();
                 
-                for( int i = 0 ; i < 4 ; i++ ){
-                    int newX = nodeX + dx[i];
-                    int newY = nodeY + dy[i];
+        //         for( int i = 0 ; i < 4 ; i++ ){
+        //             int newX = nodeX + dx[i];
+        //             int newY = nodeY + dy[i];
 
-                    if(newX>=0 && newX < grid.size()&& newY >=0 && newY<grid[0].size()&&
-                        !vis[newX][newY] && grid[newX][newY] == '1' ){
-                            q.push({newX, newY});
-                            vis[newX][newY] = true;
-                        }
+        //             if(newX>=0 && newX < grid.size()&& newY >=0 && newY<grid[0].size()&&
+        //                 !vis[newX][newY] && grid[newX][newY] == '1' ){
+        //                     q.push({newX, newY});
+        //                     vis[newX][newY] = true;
+        //                 }
 
-                }
+        //         }
+        //     }
+
+        // }
+        void dfs(vector<vector<char>>& grid , vector<vector<bool>>& vis  , int x , int y ){
+            //dfs se karte hain... 
+            int dx[4] = {0 , -1 , 0 , 1 };
+            int dy[4] = {-1, 0 , 1 , 0 };
+            vis[x][y] = true;
+
+            for( int i = 0 ; i < 4 ; i++ ){
+                int newX = x + dx[i];
+                int newY = y + dy[i];
+
+                if(newX >= 0  && newX< grid.size() && newY >=0 && newY < grid[0].size()
+                    && !vis[newX][newY] && grid[newX][newY] =='1'){
+                        dfs(grid,vis,newX,newY);
+                    }
             }
 
         }
@@ -39,7 +56,7 @@ public:
             for( int j = 0 ;  j <  m ; j++ ){
                 if( !vis[i][j] && grid[i][j] == '1' ){
                     count++ ;
-                    bfs( grid ,  vis , i , j );
+                    dfs( grid ,  vis , i , j );
                 }
             }
         }
