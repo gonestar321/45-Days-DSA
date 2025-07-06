@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int square(int x){
+        return x*x;
+    }
+    vector<int> sortedSquares(vector<int>& nums) {
+        
+        int n = nums.size();
+        int left = 0 ;
+        int right = n-1;
+        vector<int> result;
+        while(left<=right){
+
+          if( abs(nums[left]) > abs(nums[right])){
+            result.push_back(square(nums[left]));
+            left++;
+          }
+          else {
+            result.push_back(square(nums[right]));
+            right--;
+          }
+
+        }
+        reverse(result.begin(), result.end()); 
+        return result;
+
+        
+    }
+};
