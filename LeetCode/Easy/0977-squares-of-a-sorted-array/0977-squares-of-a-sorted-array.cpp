@@ -1,28 +1,26 @@
 class Solution {
 public:
-    int square(int x){
-        return x*x;
+    int squares( int a ){
+        return a * a;
     }
     vector<int> sortedSquares(vector<int>& nums) {
-        
         int n = nums.size();
-        int left = 0 ;
-        int right = n-1;
-        vector<int> result(n);
-        int pos = n-1;
-        while(left<=right){
 
-          if( abs(nums[left]) > abs(nums[right])){
-            result[pos] = square(nums[left]);
-            left++ , pos--;
-          }
-          else {
-            result[pos] = square(nums[right]);
-            right-- , pos--;
-          }
+        vector<int> result;
+        // the array is sorted in ascending order
 
+        int left = 0 , right = n-1;
+
+        while( left<=right){
+            if( abs(nums[left]) > abs(nums[right]) ){
+                result.push_back(squares(nums[left]));
+                left++;
+            }else{
+                result.push_back(squares(nums[right]));
+                right--;
+            }
         }
-       // reverse(result.begin(), result.end()); 
+        reverse(result.begin() , result.end());
         return result;
 
         
