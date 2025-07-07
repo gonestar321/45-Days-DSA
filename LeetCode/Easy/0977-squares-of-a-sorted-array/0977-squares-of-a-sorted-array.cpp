@@ -8,20 +8,21 @@ public:
         int n = nums.size();
         int left = 0 ;
         int right = n-1;
-        vector<int> result;
+        vector<int> result(n);
+        int pos = n-1;
         while(left<=right){
 
           if( abs(nums[left]) > abs(nums[right])){
-            result.push_back(square(nums[left]));
-            left++;
+            result[pos] = square(nums[left]);
+            left++ , pos--;
           }
           else {
-            result.push_back(square(nums[right]));
-            right--;
+            result[pos] = square(nums[right]);
+            right-- , pos--;
           }
 
         }
-        reverse(result.begin(), result.end()); 
+       // reverse(result.begin(), result.end()); 
         return result;
 
         
