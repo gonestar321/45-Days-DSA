@@ -18,24 +18,47 @@ public:
 
         // simpler approach. O n(log(n))
 
-        sort( nums.begin() , nums.end() ); //O(n(log(n)))
+        // sort( nums.begin() , nums.end() ); //O(n(log(n)))
 
+        // int n = nums.size();
+
+        // for( int i = 0 ; i < n ; i++ ){
+            
+        //     if( i < nums[i] ){
+        //         return i ;
+        //     }
+
+        //     if( i == n-1 && i == nums[i]){
+        //         return i + 1;
+        //     }
+
+        // }
+
+        // return 0; 
+
+
+        // simplest approach difference nikalke
         int n = nums.size();
 
+        int sum = 0;
+        int shouldBeSum = 0;
+
         for( int i = 0 ; i < n ; i++ ){
-            
-            if( i < nums[i] ){
-                return i ;
-            }
+            sum = sum + nums[i];
 
-            if( i == n-1 && i == nums[i]){
-                return i + 1;
-            }
 
+        } 
+
+        for( int i = 0 ; i <=n ; i++ ){
+            shouldBeSum = shouldBeSum + i;
         }
 
-        return 0;
+        return shouldBeSum - sum;
 
+ 
+
+
+ 
 
     }
 };
