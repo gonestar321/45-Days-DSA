@@ -1,64 +1,16 @@
 class Solution {
 public:
     int missingNumber(vector<int>& nums) {
-        
-        //. O(Nlog(N)) approach
-        
-        // int n = nums.size();
-
-        // set<int> s( nums.begin() , nums.end());
-
-        // for( int i = 0 ; i <= n ; i++ ){
-
-        //     if( s.find(i) == s.end()){
-        //         return i ;
-        //     }
-        // }
-        // return 0;
-
-        // simpler approach. O n(log(n))
-
-        // sort( nums.begin() , nums.end() ); //O(n(log(n)))
-
-        // int n = nums.size();
-
-        // for( int i = 0 ; i < n ; i++ ){
-            
-        //     if( i < nums[i] ){
-        //         return i ;
-        //     }
-
-        //     if( i == n-1 && i == nums[i]){
-        //         return i + 1;
-        //     }
-
-        // }
-
-        // return 0; 
-
-
-        // simplest approach difference nikalke
         int n = nums.size();
 
-        int sum = 0;
-        int shouldBeSum = 0;
+        unordered_set<int> s( nums.begin() , nums.end() );
 
-        for( int i = 0 ; i < n ; i++ ){
-            sum = sum + nums[i];
-
-
-        } 
-
-        for( int i = 0 ; i <=n ; i++ ){
-            shouldBeSum = shouldBeSum + i;
+        for( int i = 0 ; i <= n ; i++ ){
+            auto it = s.find(i);
+            if( it == s.end() ){
+                return i ;
+            }
         }
-
-        return shouldBeSum - sum;
-
- 
-
-
- 
-
+        return 0;
     }
 };
