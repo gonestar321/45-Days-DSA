@@ -1,28 +1,30 @@
 class Solution {
 public:
-    int squares( int a ){
-        return a * a;
+    void swap( int  i , int  j , vector<int>&nums ){
+        int b = nums[i];
+        nums[i] = nums[j];
+        nums[j] = b;
+
     }
     vector<int> sortedSquares(vector<int>& nums) {
-        int n = nums.size();
 
-        vector<int> result;
-        // the array is sorted in ascending order
-
-        int left = 0 , right = n-1;
-
-        while( left<=right){
-            if( abs(nums[left]) > abs(nums[right]) ){
-                result.push_back(squares(nums[left]));
-                left++;
-            }else{
-                result.push_back(squares(nums[right]));
-                right--;
-            }
+        for( int i = 0 ; i < nums.size() ; i++){
+            nums[i] *= nums[i];
         }
-        reverse(result.begin() , result.end());
-        return result;
 
         
+        int start = 0;
+        for( int i = 0; i < nums.size() ; i++){
+            int last = nums.size() - 1 ;
+            while( start < last ){
+                
+                if( nums[start] > nums[last]){
+                    swap(start , last , nums);
+                }
+                last--;
+            }
+            
+        }
+        return nums;
     }
 };
